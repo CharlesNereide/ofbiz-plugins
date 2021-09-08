@@ -71,8 +71,8 @@
   </#macro>
 
   <#if productCategory??>
-    <#assign categoryName = categoryContentWrapper.get("CATEGORY_NAME", "html")!/>
-    <#assign categoryDescription = categoryContentWrapper.get("DESCRIPTION", "html")!/>
+    <#assign categoryName = productCategory.categoryName?default(categoryContentWrapper.get("CATEGORY_NAME", "html"))!/>
+    <#assign categoryDescription = productCategory.description?default(categoryContentWrapper.get("DESCRIPTION", "html"))!/>
     <#if categoryName?has_content>
       <div class="card">
         <div class="card-header">
@@ -95,8 +95,8 @@
           <#if "Y" == searchInCategory?default("Y")>
             <a href="<@ofbizUrl>advancedsearch?SEARCH_CATEGORY_ID=${productCategory.productCategoryId}</@ofbizUrl>" class="buttontext">${uiLabelMap.ProductSearchInCategory}</a>
           </#if>
-          <#assign longDescription = categoryContentWrapper.get("LONG_DESCRIPTION", "html")!/>
-          <#assign categoryImageUrl = categoryContentWrapper.get("CATEGORY_IMAGE_URL", "url")!/>
+          <#assign longDescription = productCategory.longDescription?default(categoryContentWrapper.get("LONG_DESCRIPTION", "html"))!/>
+          <#assign categoryImageUrl = productCategory.categoryImageUrl?default(categoryContentWrapper.get("CATEGORY_IMAGE_URL", "url"))!/>
           <#if categoryImageUrl?string?has_content || longDescription?has_content>
             <div>
               <#if categoryImageUrl?string?has_content>
